@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import { Routes, Route } from "react-router-dom";
+import userStore from './store/store';
+import HomePage from './pages/Home.page';
+import UserListPage from './pages/user/List.page';
+import FeedListPage from './pages/feed/List.page';
+import LoginPage from './pages/auth/Login.page';
 import './App.css';
 
 function App() {
+  const user = userStore((state) => state.user);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      {user
+        ?
+          <>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/user" element={<UserListPage />} />
+            <Route path="/feed" element={<FeedListPage />} />
+          </>
+        :
+          <>
+            <Route path="/*" element={<LoginPage />} />
+          </>
+      }
+    </Routes>
   );
 }
 
