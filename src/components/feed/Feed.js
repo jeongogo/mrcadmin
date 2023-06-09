@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const Feed = ({item}) => {
@@ -19,16 +20,20 @@ const Feed = ({item}) => {
 
   return (
     <Container>
-      <div className="name">{item.name}</div>
-      <div className="distance">{item.distance}</div>
-      <div className="pace">{pace}</div>
-      <div className="date">{date}</div>
+      <Link to={`/feed/${item.id}`} className="wrap">
+        <div className="name">{item.name}</div>
+        <div className="distance">{item.distance}</div>
+        <div className="pace">{pace}</div>
+        <div className="date">{date}</div>
+      </Link>
     </Container>
   )
 }
 
 const Container = styled.div`
-  display: flex;
+  .wrap {
+    display: flex;    
+  }
   .name {
     width: 7rem;
   }
